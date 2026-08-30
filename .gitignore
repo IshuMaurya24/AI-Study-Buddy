@@ -1,8 +1,33 @@
-__pycache__/
-*.pyc
+# Environment / secrets
 .env
+*.env
+
+# Python
+__pycache__/
+*.py[codz]
+*.pyc
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
 venv/
 .venv/
+env/
+
+# Database
 *.db
-.DS_Store
+
+# Node
 node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
