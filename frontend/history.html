@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>History - AI Study Buddy</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand">🧠 AI Study Buddy</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="flashcards.html">Flashcards</a>
+      <button class="btn btn-outline" onclick="api.logout()">Log Out</button>
+    </nav>
+  </div>
+
+  <div class="container">
+    <h2>Quiz History</h2>
+    <div class="card">
+      <div id="history-loading" class="loading-row"><div class="spinner"></div><span>Loading history...</span></div>
+      <div id="history-empty" class="empty-state hidden">
+        <h3>No quiz attempts yet</h3>
+        <p>Take your first quiz to start building your history.</p>
+        <a class="btn btn-primary" href="quiz.html" style="margin-top:12px;">Generate a Quiz</a>
+      </div>
+      <div id="history-table-wrap" class="hidden"></div>
+    </div>
+
+    <h2 style="margin-top:32px;">Weak Topics</h2>
+    <div class="card">
+      <p class="helper-text" style="margin-bottom:12px;">Topics sorted from lowest to highest accuracy.</p>
+      <div id="weak-topics-loading" class="loading-row"><div class="spinner"></div><span>Analyzing performance...</span></div>
+      <div id="weak-topics-empty" class="empty-state hidden">
+        <h3>Not enough data yet</h3>
+        <p>Take a few quizzes and we'll highlight the topics to focus on.</p>
+      </div>
+      <div id="weak-topics-wrap" class="hidden"></div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/history.js"></script>
+</body>
+</html>

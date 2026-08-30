@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Results - AI Study Buddy</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand">🧠 AI Study Buddy</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="history.html">History</a>
+      <button class="btn btn-outline" onclick="api.logout()">Log Out</button>
+    </nav>
+  </div>
+
+  <div class="container" style="max-width:640px;">
+    <div id="no-result" class="empty-state hidden">
+      <h3>No recent quiz result found</h3>
+      <p>Take a quiz first to see your results here.</p>
+      <a class="btn btn-primary" href="quiz.html" style="margin-top:12px;">Generate a Quiz</a>
+    </div>
+
+    <div id="results-content" class="hidden">
+      <div class="card">
+        <div class="score-display">
+          <div class="big-score" id="score-text"></div>
+          <div class="percentage" id="percentage-text"></div>
+        </div>
+        <div class="performance-msg" id="performance-msg"></div>
+        <div class="btn-group" style="justify-content:center;">
+          <a class="btn btn-primary" href="quiz.html">Try Another Quiz</a>
+          <a class="btn btn-secondary" href="flashcards.html">Generate Flashcards</a>
+          <a class="btn btn-outline" href="history.html">View History</a>
+        </div>
+      </div>
+
+      <h3 style="margin-top:28px;">Answer Review</h3>
+      <div id="review-list"></div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      api.requireAuth();
+
+      const raw = sessionStorage.getItem("asb_last_result");
+      if (!raw) {
+        document.getElementById("no-result").classList.remove("hidden");
+        return;
+      }
+
+      const result = JSON.parse(raw);
+      document.getElementById("results-content").classList.remove("hidden");
+
+      document.getElementById("score-text").textContent = `${result.score} / ${result.total_questions}`;
+      document.getElementById("percentage-text").textContent = `${result.percentage}%`;
+
+      let message = "Keep practicing — you'll get there!";
+      if (result.percentage >= 80) message = "Excellent work! You have a strong grasp of this topic.";
+      else if (result.percentage >= 60) message = "Good job! A little more review will help.";
+      else if (result.percentage >= 40) message = "Decent effort — revisit the weak spots below.";
+      document.getElementById("performance-msg").textContent = message;
+
+      const reviewList = document.getElementById("review-list");
+      reviewList.innerHTML = result.results.map((r, i) => `
+        <div class="card">
+          <strong>Question ${i + 1}</strong>
+          <p style="margin:8px 0;">
+            Your answer: <strong>${(r.selected_option || "—").toUpperCase()}</strong>
+            &nbsp;|&nbsp; Correct answer: <strong>${r.correct_option.toUpperCase()}</strong>
+            &nbsp;
+            <span class="badge ${r.is_correct ? 'badge-easy' : 'badge-hard'}">
+              ${r.is_correct ? "Correct" : "Incorrect"}
+            </span>
+          </p>
+          ${r.explanation ? `<div class="explanation-box">${r.explanation}</div>` : ""}
+        </div>
+      `).join("");
+    });
+  </script>
+</body>
+</html>

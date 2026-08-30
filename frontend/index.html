@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Study Buddy</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand">🧠 AI Study Buddy</div>
+    <nav>
+      <a href="quiz.html">Quiz</a>
+      <a href="flashcards.html">Flashcards</a>
+      <a href="history.html">History</a>
+      <button class="btn btn-outline" onclick="api.logout()">Log Out</button>
+    </nav>
+  </div>
+
+  <div class="hero">
+    <h1>AI Study Buddy</h1>
+    <p>Turn any topic into an instant quiz or flashcard deck, powered by AI — then track your progress over time.</p>
+    <div class="btn-group" style="justify-content:center;">
+      <a class="btn btn-primary" href="quiz.html">Generate Quiz</a>
+      <a class="btn btn-secondary" href="flashcards.html">Generate Flashcards</a>
+      <a class="btn btn-outline" href="history.html">View History</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="grid grid-3">
+      <div class="card card-hover">
+        <h3>📝 Quiz Mode</h3>
+        <p class="helper-text">Pick a topic, difficulty, and question count. Get instant AI-generated MCQs with explanations.</p>
+      </div>
+      <div class="card card-hover">
+        <h3>🗂️ Flashcards</h3>
+        <p class="helper-text">Generate flip-style flashcards for quick concept review before an exam.</p>
+      </div>
+      <div class="card card-hover">
+        <h3>📊 Progress Tracking</h3>
+        <p class="helper-text">Every attempt is saved, so you can see your history and spot your weakest topics.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => api.requireAuth());
+  </script>
+</body>
+</html>

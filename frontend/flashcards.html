@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flashcards - AI Study Buddy</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand">🧠 AI Study Buddy</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="quiz.html">Quiz</a>
+      <a href="history.html">History</a>
+      <button class="btn btn-outline" onclick="api.logout()">Log Out</button>
+    </nav>
+  </div>
+
+  <div class="container" style="max-width:640px;">
+
+    <div id="fc-setup-card" class="card">
+      <h2>Generate Flashcards</h2>
+      <p class="helper-text" style="margin-bottom:20px;">Great for quick review before an exam.</p>
+
+      <div id="fc-setup-error" class="alert alert-error hidden"></div>
+
+      <form id="fc-setup-form">
+        <div class="form-group">
+          <label for="fc-topic">Topic</label>
+          <input type="text" id="fc-topic" placeholder="e.g. DBMS Normalization">
+        </div>
+
+        <div class="form-group">
+          <label>Difficulty</label>
+          <div class="choice-group" id="fc-difficulty-choices">
+            <div class="choice selected" data-value="easy">Easy</div>
+            <div class="choice" data-value="medium">Medium</div>
+            <div class="choice" data-value="hard">Hard</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Number of Cards</label>
+          <div class="choice-group" id="fc-count-choices">
+            <div class="choice" data-value="5">5</div>
+            <div class="choice selected" data-value="10">10</div>
+            <div class="choice" data-value="15">15</div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Generate Flashcards</button>
+      </form>
+    </div>
+
+    <div id="fc-loading-card" class="card hidden">
+      <div class="loading-row">
+        <div class="spinner"></div>
+        <span>Generating flashcards with AI...</span>
+      </div>
+    </div>
+
+    <div id="fc-study-card" class="hidden">
+      <p class="progress-text" id="fc-progress" style="text-align:center;"></p>
+
+      <div class="flashcard-wrap">
+        <div class="flashcard" id="flashcard">
+          <div class="flashcard-face flashcard-front" id="fc-front-text"></div>
+          <div class="flashcard-face flashcard-back" id="fc-back-text"></div>
+        </div>
+      </div>
+      <p class="helper-text" style="text-align:center; margin-top:10px;">Click the card to flip it</p>
+
+      <div class="flashcard-controls">
+        <button id="fc-prev-btn" class="btn btn-outline">← Previous</button>
+        <button id="fc-next-btn" class="btn btn-primary">Next →</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/flashcards.js"></script>
+</body>
+</html>

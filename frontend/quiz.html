@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generate Quiz - AI Study Buddy</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="brand">🧠 AI Study Buddy</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="flashcards.html">Flashcards</a>
+      <a href="history.html">History</a>
+      <button class="btn btn-outline" onclick="api.logout()">Log Out</button>
+    </nav>
+  </div>
+
+  <div class="container" style="max-width:640px;">
+
+    <!-- Setup Card -->
+    <div id="setup-card" class="card">
+      <h2>Generate a Quiz</h2>
+      <p class="helper-text" style="margin-bottom:20px;">Choose a topic and Claude-style AI will build your quiz.</p>
+
+      <div id="setup-error" class="alert alert-error hidden"></div>
+
+      <form id="quiz-setup-form">
+        <div class="form-group">
+          <label for="quiz-topic">Topic</label>
+          <input type="text" id="quiz-topic" placeholder="e.g. Database Management System">
+        </div>
+
+        <div class="form-group">
+          <label>Difficulty</label>
+          <div class="choice-group" id="difficulty-choices">
+            <div class="choice" data-value="easy">Easy</div>
+            <div class="choice selected" data-value="medium">Medium</div>
+            <div class="choice" data-value="hard">Hard</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Number of Questions</label>
+          <div class="choice-group" id="count-choices">
+            <div class="choice selected" data-value="5">5</div>
+            <div class="choice" data-value="10">10</div>
+            <div class="choice" data-value="15">15</div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Generate Quiz</button>
+      </form>
+    </div>
+
+    <!-- Loading Card -->
+    <div id="loading-card" class="card hidden">
+      <div class="loading-row">
+        <div class="spinner"></div>
+        <span>Generating your quiz with AI...</span>
+      </div>
+    </div>
+
+    <!-- Quiz Taking Card -->
+    <div id="quiz-card" class="card hidden">
+      <div class="progress-text" id="progress-text"></div>
+      <div class="progress-bar"><div class="progress-bar-fill" id="progress-bar-fill"></div></div>
+      <div class="question-text" id="question-text"></div>
+      <div id="options-wrap"></div>
+      <div id="explanation-box" class="explanation-box hidden"></div>
+      <button id="next-btn" class="btn btn-primary btn-block hidden" style="margin-top:16px;">Next Question</button>
+    </div>
+
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/quiz.js"></script>
+</body>
+</html>
